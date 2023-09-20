@@ -199,7 +199,7 @@ const useFocusableHook = <P>({
     onEnterReleaseHandler,
     onArrowPressHandler,
     onFocusHandler,
-    onBlurHandler
+    onBlurHandler,
   ]);
 
   return {
@@ -207,6 +207,9 @@ const useFocusableHook = <P>({
     focusSelf,
     focused,
     hasFocusedChild,
+    setFocus: SpatialNavigation.isNativeMode()
+      ? noop
+      : SpatialNavigation.setFocus,
     focusKey // returns either the same focusKey as passed in, or generated one
   };
 };
