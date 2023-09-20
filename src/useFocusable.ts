@@ -58,6 +58,7 @@ export interface UseFocusableConfig<P = object> {
   onFocus?: FocusHandler<P>;
   onBlur?: BlurHandler<P>;
   extraProps?: P;
+  isNavigation?:boolean;
 }
 
 export interface UseFocusableResult {
@@ -69,22 +70,23 @@ export interface UseFocusableResult {
 }
 
 const useFocusableHook = <P>({
-  focusable = true,
-  saveLastFocusedChild = true,
-  trackChildren = false,
-  autoRestoreFocus = true,
-  forceFocus = false,
-  isFocusBoundary = false,
-  focusBoundaryDirections,
-  focusKey: propFocusKey,
-  preferredChildFocusKey,
-  onEnterPress = noop,
-  onEnterRelease = noop,
-  onArrowPress = () => true,
-  onFocus = noop,
-  onBlur = noop,
-  extraProps
-}: UseFocusableConfig<P> = {}): UseFocusableResult => {
+                               focusable = true,
+                               saveLastFocusedChild = true,
+                               trackChildren = false,
+                               autoRestoreFocus = true,
+                               forceFocus = false,
+                               isFocusBoundary = false,
+                               focusBoundaryDirections,
+                               focusKey: propFocusKey,
+                               preferredChildFocusKey,
+                               onEnterPress = noop,
+                               onEnterRelease = noop,
+                               onArrowPress = () => true,
+                               onFocus = noop,
+                               onBlur = noop,
+                               extraProps,
+                               isNavigation = false,
+                             }: UseFocusableConfig<P> = {}): UseFocusableResult => {
   const onEnterPressHandler = useCallback(
     (details: KeyPressDetails) => {
       onEnterPress(extraProps, details);
@@ -160,7 +162,8 @@ const useFocusableHook = <P>({
       focusBoundaryDirections,
       autoRestoreFocus,
       forceFocus,
-      focusable
+      focusable,
+      isNavigation
     });
 
     return () => {
