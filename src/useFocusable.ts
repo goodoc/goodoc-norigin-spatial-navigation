@@ -67,6 +67,7 @@ export interface UseFocusableResult {
   focused: boolean;
   hasFocusedChild: boolean;
   focusKey: string;
+  setFocus: (focusKey: string) => void;
 }
 
 const useFocusableHook = <P>({
